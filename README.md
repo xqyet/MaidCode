@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
     <img
-         src="resources/icons/maidcode.png"
+         src="resources/icons/maid.png"
          width="25%">
   </picture>
 
