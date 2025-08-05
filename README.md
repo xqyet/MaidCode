@@ -5,7 +5,7 @@
          width="25%">
   </picture>
 
-[Website](https://sites.google.com/view/george-lang/home?authuser=0) | [Download]( ) | [Learn]( ) | [Documentation]( ) | [Online Interpreter]( )
+[Website](https://sites.google.com/view/george-lang/home?authuser=0) | [Guidebook]( ) | [Documentation]( ) | [Online Interpreter]( )
 
 _A very simple interpreted programming language for beginners._
 </div>
