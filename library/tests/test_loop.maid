@@ -1,0 +1,5 @@
+# file test_loop.maid: test a large iteration of maid's 'walk' loop
+
+walk i = 0 through 10000 {
+    serve(i);
+}

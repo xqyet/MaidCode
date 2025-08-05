@@ -1,0 +1,5 @@
+# file test_imports.maid: test maid's import system with the `fetch` keyword
+
+fetch std_math;
+
+serve(math_pi); # object defined in math module

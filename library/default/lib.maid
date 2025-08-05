@@ -1,0 +1,9 @@
+# file lib.maid: default library loaded automatically above every maid program
+
+fetch _env("MAID_STD") + "/default/objects.maid";
+fetch _env("MAID_STD") + "/default/type.maid";
+fetch _env("MAID_STD") + "/default/list.maid";
+fetch _env("MAID_STD") + "/default/string.maid";
+fetch _env("MAID_STD") + "/default/number.maid";
+fetch _env("MAID_STD") + "/default/debug.maid";
+fetch _env("MAID_PKG") + "/kennels.maid";
