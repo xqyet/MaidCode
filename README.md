@@ -2,7 +2,7 @@
   <picture>
     <img
          src="resources/icons/maid.png"
-         width="25%">
+         width="16%">
   </picture>
 
 [Website](https://sites.google.com/view/george-lang/home?authuser=0) | [Guidebook]( ) | [Documentation]( ) | [Online Interpreter]( )
