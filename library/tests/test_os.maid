@@ -1,0 +1,7 @@
+# file test_os.maid: test operating system functionality
+
+fetch std_os;
+
+serve(os_type());
+serve(os_path());
+serve(os_user_dir());

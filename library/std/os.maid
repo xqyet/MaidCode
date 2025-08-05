@@ -1,0 +1,67 @@
+# file os.maid: operating system features in maid
+
+# get the operating system type
+# returns "windows", "macos", or "unknown" if the os can't be found
+func os_type() {
+    obj os = "unknown";
+
+    unsafe {
+        # 'OS' is windows only - we need to try to access it then default otherwise
+        obj _type = _env("OS");
+
+        if _type == "Windows_NT" {
+            obj os = "windows";
+        }
+    } safe _ {
+        obj os = "macos";
+    }
+
+    if os == "unknown" {
+        serve("OSError: unable to access os type");
+    }
+
+    give os;
+}
+
+# safe wrapper over the built-in '_env' function
+# returns the output of the environment variable
+func os_env(var) {
+    if type(var) != "string" {
+        uhoh("expected type string in 'os_env'");
+    }
+
+    unsafe {
+        give _env(var);
+    } safe error {
+        serve("OSError: " + error);
+
+        give "";
+    }
+}
+
+# get the system PATH variable
+# returns the full system PATH
+func os_path() {
+    # we don't really know if 'PATH' is available, so gracefully handle the error
+    unsafe {
+        give _env("PATH");
+    } safe error {
+        serve(error);
+    };
+}
+
+# get the user dir
+# returns the full user dir
+func os_user_dir() {
+    obj dir = "";
+
+    unsafe {
+        # windows
+        obj dir = _env("USERPROFILE");
+    } safe _ {
+        # macos
+        obj dir = _env("HOME");
+    }
+
+    give dir;
+}

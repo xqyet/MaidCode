@@ -1,0 +1,11 @@
+# file test_try.maid: test maid's try/except functionality
+
+func danger() {
+    unsafe {
+        1 / 0;
+    } safe error {
+        serve("Some error occured: " + error);
+    }
+}
+
+danger();
