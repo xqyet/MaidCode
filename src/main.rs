@@ -2,6 +2,16 @@ use clap::{Parser, Subcommand};
 use std::env;
 use std::path::Path;
 
+use maid_lang::{
+    create_package_dir,
+    new_project,
+    add_package,
+    remove_package,
+    update_package,
+    run,
+    launch_repl,
+};
+
 const VERSION: &str = "2.6";
 
 #[derive(Parser)]
@@ -52,35 +62,35 @@ fn main() {
         env::set_var("MAID_PKG", &pkg_path);
     }
 
-    maid::create_package_dir();
+    crate::create_package_dir();
 
     let cli = Cli::parse();
 
     match (cli.command, cli.file) {
         (Some(Commands::New { name }), _) => {
-            maid::new_project(Path::new(&name), false);
+            crate::new_project(Path::new(&name), false);
         }
         (Some(Commands::Init), _) => {
-            maid::new_project(Path::new("."), true);
+            crate::new_project(Path::new("."), true);
         }
         (Some(Commands::Install { name }), _) => {
-            maid::add_package(&name);
+            crate::add_package(&name);
         }
         (Some(Commands::Remove { name }), _) => {
-            maid::remove_package(&name);
+            crate::remove_package(&name);
         }
         (Some(Commands::Update { name }), _) => {
-            maid::update_package(&name);
+            crate::update_package(&name);
         }
         (None, Some(file)) => {
-            let error = maid::run(&file, None);
+            let error = crate::run(&file, None);
 
             if let Some(err) = error {
                 println!("{err}");
             }
         }
         (None, None) => {
-            maid::launch_repl(VERSION);
+            crate::launch_repl(VERSION);
         }
     }
 }
