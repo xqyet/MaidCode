@@ -5,7 +5,7 @@
          width="16%">
   </picture>
 
-[Website](https://sites.google.com/view/george-lang/home?authuser=0) | [Guidebook]( ) | [Documentation]( ) | [Online Interpreter]( )
+[Website](https://maidcode.me/) | [Guidebook](https://maidcode.me/docs/getting-started/installation) | [Documentation](https://maidcode.me/docs/server-actions/getToken) | [Online Interpreter]( )
 
 _A very simple interpreted programming language for beginners._
 </div>

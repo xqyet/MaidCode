@@ -4,17 +4,17 @@
 # returns a string representation of the documentation url
 func docs(value) {
     if type(value) == "number" {
-        give "https://sites.google.com/view/george-lang/documentation/standard-docs/types/numbers/"
+        give "https://maidcode.me/docs/server-actions/getToken"
     } alsoif type(value) == "string" {
-        give "https://sites.google.com/view/george-lang/documentation/standard-docs/types/strings/"
+        give "https://maidcode.me/docs/server-actions/getToken"
     } alsoif type(value) == "list" {
-        give "https://sites.google.com/view/george-lang/documentation/standard-docs/types/lists/"
+        give "https://maidcode.me/docs/server-actions/getToken"
     } alsoif type(value) == "function" {
-        give "https://sites.google.com/view/george-lang/documentation/standard-docs/keywords/func/"
+        give "https://maidcode.me/docs/server-actions/getToken"
     } alsoif type(value) == "built-in-function" {
-        give "https://sites.google.com/view/george-lang/documentation/standard-docs/types/builtin/"
+        give "https://maidcode.me/docs/server-actions/getToken"
     } otherwise {
-        give "https://sites.google.com/view/george-lang/home"
+        give "https://maidcode.me/docs/server-actions/getToken"
     }
 }
 
