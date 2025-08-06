@@ -5,7 +5,7 @@
          width="16%">
   </picture>
 
-[Website](https://maidcode.me/) | [Guidebook](https://maidcode.me/docs/getting-started/installation) | [Documentation](https://maidcode.me/docs/server-actions/getToken) | [Online Interpreter]( )
+[Website](https://maidcode.me/) | [Download](https://github.com/xqyet/MaidCode/releases) | [Guidebook](https://maidcode.me/docs/getting-started/installation) | [Documentation](https://maidcode.me/docs/server-actions/getToken) | [Online Interpreter]( )
 
 _A very simple interpreted programming language for beginners._
 </div>
