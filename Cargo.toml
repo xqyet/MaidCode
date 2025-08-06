@@ -1,5 +1,5 @@
 [package]
-name = "maid"
+name = "maid-lang"
 repository = "https://github.com/xqyet/MaidCode.git"
 description = "Maid Programming Language"
 authors = ["xqyet"]
