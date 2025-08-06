@@ -79,7 +79,7 @@ greet("Maid");
 - Easy-to-understand functions like `sweep()`, `stash()`, and `uhoh()`
 - Package management with `kennels` and extensible with `fetch`
 - Open source
-- 
+- Online Interpreter coming soon! Play with Maid in your browser!
 ## Package Installation
 
 You can install **Maid** Programming Language globally using [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) which comes pre-packaged when downloading Rust:
