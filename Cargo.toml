@@ -9,6 +9,7 @@ license = "MIT"
 
 include = [
     "src/**",
+    "library/**",
     "Cargo.toml",
     "README.md",
     "LICENSE",
