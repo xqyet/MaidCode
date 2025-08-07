@@ -90,9 +90,9 @@ cargo install maid-lang
 ```
 Once installed, run the maid command:
 ```
-maid new hello-world
+maid-lang new hello-world
 cd hello-world
-maid run file.maid
+maid-lang run file.maid
 ```
 or check out the quick setup instructions in the [Guide Book](https://maidcode.me/docs/getting-started/installation).
 
