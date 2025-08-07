@@ -5,7 +5,7 @@
          width="16%">
   </picture>
 
-[Website](https://maidcode.me/) | [Download](https://github.com/xqyet/MaidCode/releases) | [Guidebook](https://maidcode.me/docs/getting-started/installation) | [Documentation](https://maidcode.me/docs/server-actions/getToken) | [Online Interpreter]( )
+[Website](https://maidcode.me/) | [Download](https://github.com/xqyet/MaidCode/releases) | [Guidebook](https://maidcode.me/docs/getting-started/installation) | [Documentation](https://maidcode.me/docs/server-actions/getToken) | [Online Interpreter](https://maid-web-backend.fly.dev/)
 
 _A very simple interpreted programming language for beginners._
 </div>
@@ -79,7 +79,7 @@ greet("Maid");
 - Easy-to-understand functions like `sweep()`, `stash()`, and `uhoh()`
 - Package management with `kennels` and extensible with `fetch`
 - Open source
-- Online Interpreter coming soon! Play with Maid in your browser!
+- [Online Interpreter](https://maid-web-backend.fly.dev/) is live! Play with Maid in your browser!
 ## Package Installation
 
 You can install **Maid** Programming Language globally using [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) which comes pre-packaged when downloading Rust:
@@ -98,7 +98,7 @@ or check out the quick setup instructions in the [Guide Book](https://maidcode.m
 
 ## Wanna Help Out?
 
-Contributors are welcome! Also feel free to try my [Online Interpreter]( ) for Maid (work in progress! demo below, I will host soon!)
+Contributors are welcome! Also feel free to try my [Online Interpreter](https://maid-web-backend.fly.dev/) for Maid.
 
 ![Interpreter](https://github.com/xqyet/MaidCode/raw/main/resources/icons/interpreter.png)
 
