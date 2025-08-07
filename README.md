@@ -5,7 +5,7 @@
          width="16%">
   </picture>
 
-[Website](https://maidcode.me/) | [Download](https://crates.io/crates/maid-lang/1.0.3) | [Guidebook](https://maidcode.me/docs/getting-started/installation) | [Documentation](https://maidcode.me/docs/server-actions/getToken) | [Online Interpreter](https://maid-web-backend.fly.dev/)
+[Website](https://maidcode.me/) | [Download](https://crates.io/crates/maid-lang) | [Guidebook](https://maidcode.me/docs/getting-started/installation) | [Documentation](https://maidcode.me/docs/server-actions/getToken) | [Online Interpreter](https://maid-web-backend.fly.dev/)
 
 _A very simple interpreted programming language for beginners._
 </div>
