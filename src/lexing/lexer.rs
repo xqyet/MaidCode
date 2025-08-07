@@ -176,6 +176,28 @@ impl Lexer {
 
                     Some(token)
                 }
+
+                ';' => {
+                   let tok = Token::new(
+                       TokenType::TT_SEMI,
+                       None,
+                       Some(self.position.clone()),
+                       Some(self.position.clone()),
+                       );
+                       self.advance();
+                       Some(tok)
+                }
+                '\n' => {
+                   let tok = Token::new(
+                       TokenType::TT_NEWLINE,
+                       None,
+                       Some(self.position.clone()),
+                       Some(self.position.clone()),
+                       );
+                       self.advance();
+                       Some(tok)
+                   }
+
                 '}' => {
                     let token = Token::new(
                         TokenType::TT_RBRACKET,

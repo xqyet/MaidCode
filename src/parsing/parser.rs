@@ -47,12 +47,16 @@ impl Parser {
     }
 
     #[inline]
-    pub fn skip_newlines(&mut self, parse_result: &mut ParseResult) {
-        while self.current_token_ref().token_type == TokenType::TT_NEWLINE {
-            parse_result.register_advancement();
+    pub fn skip_separators(&mut self, pr: &mut ParseResult) {
+        while matches!(
+            self.current_token_ref().token_type,
+            TokenType::TT_NEWLINE | TokenType::TT_SEMI
+        ) {
+            pr.register_advancement();
             self.advance();
         }
     }
+
 
     pub fn update_current_token(&mut self) {
         if self.token_index >= 0 && self.token_index < self.tokens.len() as isize {
@@ -179,7 +183,7 @@ impl Parser {
         parse_result.register_advancement();
         self.advance();
 
-        self.skip_newlines(&mut parse_result);
+        self.skip_separators(&mut parse_result);
 
         if self.current_token_ref().token_type == TokenType::TT_RSQUARE {
             parse_result.register_advancement();
@@ -202,7 +206,7 @@ impl Parser {
                 parse_result.register_advancement();
                 self.advance();
 
-                self.skip_newlines(&mut parse_result);
+                self.skip_separators(&mut parse_result);
 
                 let element = parse_result.register(self.expr());
 
@@ -213,7 +217,7 @@ impl Parser {
                 element_nodes.push(element.unwrap());
             }
 
-            self.skip_newlines(&mut parse_result);
+            self.skip_separators(&mut parse_result);
 
             if self.current_token_ref().token_type != TokenType::TT_RSQUARE {
                 return parse_result.failure(Some(StandardError::new(
@@ -267,7 +271,7 @@ impl Parser {
             parse_result.register_advancement();
             self.advance();
 
-            self.skip_newlines(&mut parse_result);
+            self.skip_separators(&mut parse_result);
 
             if self.current_token_ref().token_type != TokenType::TT_LBRACKET {
                 return (
@@ -398,7 +402,7 @@ impl Parser {
             return (parse_result, Vec::new(), None);
         }
 
-        self.skip_newlines(&mut parse_result);
+        self.skip_separators(&mut parse_result);
 
         if self.current_token_ref().token_type != TokenType::TT_LBRACKET {
             return (
@@ -562,7 +566,7 @@ impl Parser {
             step_value = None;
         }
 
-        self.skip_newlines(&mut parse_result);
+        self.skip_separators(&mut parse_result);
 
         if self.current_token_ref().token_type != TokenType::TT_LBRACKET {
             return parse_result.failure(Some(StandardError::new(
@@ -646,7 +650,7 @@ impl Parser {
             return parse_result;
         }
 
-        self.skip_newlines(&mut parse_result);
+        self.skip_separators(&mut parse_result);
 
         if self.current_token_ref().token_type != TokenType::TT_LBRACKET {
             return parse_result.failure(Some(StandardError::new(
@@ -702,7 +706,7 @@ impl Parser {
         parse_result.register_advancement();
         self.advance();
 
-        self.skip_newlines(&mut parse_result);
+        self.skip_separators(&mut parse_result);
 
         if self.current_token_ref().token_type != TokenType::TT_LBRACKET {
             return parse_result.failure(Some(StandardError::new(
@@ -734,7 +738,7 @@ impl Parser {
         parse_result.register_advancement();
         self.advance();
 
-        self.skip_newlines(&mut parse_result);
+        self.skip_separators(&mut parse_result);
 
         if !self
             .current_token_ref()
@@ -751,7 +755,7 @@ impl Parser {
         parse_result.register_advancement();
         self.advance();
 
-        self.skip_newlines(&mut parse_result);
+        self.skip_separators(&mut parse_result);
 
         if self.current_token_ref().token_type != TokenType::TT_IDENTIFIER {
             return parse_result.failure(Some(StandardError::new(
@@ -1043,6 +1047,18 @@ impl Parser {
         }
 
         statements.push(statement.unwrap());
+
+         // soft enforce either a newline, a '}', or EOF.
+         if !matches!(
+             self.current_token_ref().token_type,
+             TokenType::TT_NEWLINE | TokenType::TT_RBRACKET | TokenType::TT_SEMI | TokenType::TT_EOF){
+                return parse_result.failure(Some(StandardError::new(
+                    "expected newline or statement separator",
+                    self.current_pos_start(),
+                    self.current_pos_end(),
+                    Some("add a newline or semicolon between statements"),
+                )));
+            }
 
         let mut more_statements = true;
 
@@ -1394,7 +1410,7 @@ impl Parser {
         parse_result.register_advancement();
         self.advance();
 
-        self.skip_newlines(&mut parse_result);
+        self.skip_separators(&mut parse_result);
 
         if self.current_token_ref().token_type != TokenType::TT_LBRACKET {
             return parse_result.failure(Some(StandardError::new(

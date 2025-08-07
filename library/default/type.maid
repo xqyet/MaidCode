@@ -41,3 +41,4 @@ func isbool(value) {
 func isnull(value) {
     give value == 0;
 }
+
