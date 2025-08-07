@@ -3,7 +3,7 @@ name = "maid-lang"
 repository = "https://github.com/xqyet/MaidCode.git"
 description = "Maid Programming Language"
 authors = ["xqyet"]
-version = "1.0.5"
+version = "1.0.6"
 edition = "2021"
 license = "MIT"
 
@@ -24,7 +24,17 @@ simply_colored = "0.1.0"
 zip = { version = "4.3.0", default-features = false }
 toml = "0.9.2"
 stringcase = "0.4.0"
+include_dir = "0.7"
+dirs = "5"
 
 [features]
 default = []
 benchmark = []
+
+[[bin]]
+name = "maid"
+path = "src/main.rs"
+
+[[bin]]
+name = "maid-lang"
+path = "src/main.rs"
