@@ -4,7 +4,7 @@ repository = "https://github.com/xqyet/MaidCode.git"
 description = "Maid Programming Language"
 authors = ["xqyet"]
 version = "1.0.1"
-edition = "2024"
+edition = "2021"
 license = "MIT"
 
 include = [
