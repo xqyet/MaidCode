@@ -31,10 +31,4 @@ dirs = "5"
 default = []
 benchmark = []
 
-[[bin]]
-name = "maid"
-path = "src/main.rs"
 
-[[bin]]
-name = "maid-lang"
-path = "src/main.rs"

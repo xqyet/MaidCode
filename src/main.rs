@@ -1,12 +1,16 @@
 use clap::{Parser, Subcommand};
-use std::{env, path::PathBuf};
+use std::{
+    env,
+    fs,
+    path::{Path, PathBuf},
+};
 
-use maid_lang::{create_package_dir, new_project, add_package, remove_package, update_package, run, launch_repl};
+use maid_lang::{
+    create_package_dir, new_project, add_package, remove_package, update_package, run, launch_repl,
+};
 
-// === NEW: embed stdlib ===
 use include_dir::{include_dir, Dir};
 static STD_DIR: Dir<'_>     = include_dir!("$CARGO_MANIFEST_DIR/library");
-// If you want to ship a starter kennels file/folder, embed it too (optional)
 static KENNELS_DIR: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/kennels");
 
 const VERSION: &str = "2.6";
@@ -14,6 +18,7 @@ const VERSION: &str = "2.6";
 #[derive(Parser)]
 #[command(name = "maid", version = VERSION, about = "The MaidCode Programming Language")]
 struct Cli {
+    /// Path to a .maid file to run
     file: Option<String>,
     #[command(subcommand)]
     command: Option<Commands>,
@@ -21,42 +26,52 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    #[command(about = "Create a maid project")]
+    /// Create a maid project
     New { name: String },
-    #[command(about = "Initialize a maid project in the current directory")]
+    /// Initialize a maid project in the current directory
     Init,
-    #[command(about = "Install a maid kennel from the internet")]
+    /// Install a maid kennel from the internet
     Install { name: String },
-    #[command(about = "Remove an installed maid kennel")]
+    /// Remove an installed maid kennel
     Remove { name: String },
-    #[command(about = "Update an installed maid kennel to the latest version")]
+    /// Update an installed maid kennel to the latest version
     Update { name: String },
 }
 
-// Self-install stdlib to a user data dir and set envs so lib.maid can fetch it.
+/// Ensure stdlib + kennels are available and point MAID_STD / MAID_PKG to them.
 fn ensure_std_available() -> (PathBuf, PathBuf) {
-    // Honor user overrides if they already set env vars.
+    // Respect explicit env overrides
     if let (Ok(std), Ok(pkg)) = (env::var("MAID_STD"), env::var("MAID_PKG")) {
         return (PathBuf::from(std), PathBuf::from(pkg));
     }
 
-    // e.g. Windows: %LOCALAPPDATA%\maid, Linux: ~/.local/share/maid, macOS: ~/Library/Application Support/maid
-    let base = dirs::data_local_dir()
-        .or_else(dirs::home_dir)
-        .unwrap()
-        .join("maid");
-
-    let std_path = base.join("library");
-    let pkg_path = base; // your code expects kennels.maid under MAID_PKG root
-
-    // Extract embedded std if missing (first run)
-    if !std_path.exists() {
-        STD_DIR.extract(&std_path).expect("extract std library");
+    // Dev mode: when running from the repo, use live files
+    let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let repo_std  = repo_root.join("library");
+    let repo_pkg  = repo_root.join("kennels"); // kennels/kennels.maid
+    if cfg!(debug_assertions) && repo_std.exists() {
+        env::set_var("MAID_STD", &repo_std);
+        env::set_var("MAID_PKG", &repo_pkg);
+        return (repo_std, repo_pkg);
     }
-    // Optional: if you ship any starter files in /kennels, extract them
-    let kennels_target = pkg_path.join("kennels");
-    if KENNELS_DIR.entries().len() > 0 && !kennels_target.exists() {
-        KENNELS_DIR.extract(&kennels_target).ok();
+
+    // Installed path (per-user data dir)
+    let base     = dirs::data_local_dir().or_else(dirs::home_dir).unwrap().join("maid");
+    let std_path = base.join("library");
+    let pkg_path = base.join("kennels");
+
+    // Create dirs first
+    let _ = fs::create_dir_all(&std_path);
+    let _ = fs::create_dir_all(&pkg_path);
+
+    // Extract embedded assets (idempotent)
+    if !STD_DIR.entries().is_empty() {
+        let _ = STD_DIR.extract(&std_path);
+    } else {
+        eprintln!("Warning: embedded std library is empty");
+    }
+    if !KENNELS_DIR.entries().is_empty() {
+        let _ = KENNELS_DIR.extract(&pkg_path);
     }
 
     env::set_var("MAID_STD", &std_path);
@@ -65,20 +80,17 @@ fn ensure_std_available() -> (PathBuf, PathBuf) {
 }
 
 fn main() {
-    // Make sure std is present and envs are set BEFORE calling any maid_lang APIs.
-    let _ = ensure_std_available();
-
-    // This likely writes/ensures kennels.maid, etc. — now it will use MAID_PKG we set above.
-    create_package_dir();
+    let _ = ensure_std_available(); // sets env + ensures files exist
+    create_package_dir();           // uses MAID_PKG
 
     let cli = Cli::parse();
 
     match (cli.command, cli.file) {
-        (Some(Commands::New { name }), _) => new_project(std::path::Path::new(&name), false),
-        (Some(Commands::Init),          _) => new_project(std::path::Path::new("."), true),
-        (Some(Commands::Install { name }), _) => add_package(&name),
-        (Some(Commands::Remove  { name }), _) => remove_package(&name),
-        (Some(Commands::Update  { name }), _) => update_package(&name),
+        (Some(Commands::New { name }), _)      => new_project(Path::new(&name), false),
+        (Some(Commands::Init), _)              => new_project(Path::new("."), true),
+        (Some(Commands::Install { name }), _)  => add_package(&name),
+        (Some(Commands::Remove  { name }), _)  => remove_package(&name),
+        (Some(Commands::Update  { name }), _)  => update_package(&name),
         (None, Some(file)) => {
             if let Some(err) = run(&file, None) {
                 println!("{err}");
