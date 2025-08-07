@@ -32,4 +32,7 @@ dirs = "5"
 default = []
 benchmark = []
 
+[[bin]]
+name = "maid"
+path = "src/main.rs"
 
