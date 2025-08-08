@@ -92,7 +92,7 @@ Once installed, run the maid command:
 ```
 maid new hello-world
 cd hello-world
-maid run home.maid
+maid home.maid
 ```
 or check out the quick setup instructions in the [Guide Book](https://maidcode.me/docs/getting-started/installation).
 
