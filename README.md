@@ -90,11 +90,17 @@ cargo install maid-lang
 ```
 Once installed, run the maid command:
 ```
-maid new hello-world
-cd hello-world
+maid new project
+cd project
 maid home.maid
 ```
-or check out the quick setup instructions in the [Guide Book](https://maidcode.me/docs/getting-started/installation).
+Watch your output:
+
+```
+'Hello, my Maid!'
+```
+
+Now get busy creating in Maid! You may also check out the quick setup instructions in the [Guide Book](https://maidcode.me/docs/getting-started/installation) which I may extend upon.
 
 ## Wanna Help Out?
 
