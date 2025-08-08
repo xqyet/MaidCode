@@ -118,11 +118,24 @@ pub fn new_project(dir_name: &Path, init: bool) {
     fs::create_dir(dir_name.join("src")).expect("'src/' directory already exists");
 
     let _ = fs::write(
-        dir_name.join("main.maid"),
-        "func main() {\n    greet(\"Hello world!\");\n}\n\nmain();",
+        dir_name.join("home.maid"),
+        r#"func home() {
+        serve("Hello world!");
+    }
+
+    home();
+
+    # greet someone
+    func greet(name) {
+        serve("Hello, " + name + "!");
+    }
+
+    greet("my Maid");
+    "#,
     );
+
     let _ = fs::write(
         dir_name.join("README.md"),
-        "# Welcome to MaidCode!\nTo get started, see our documentation here.",
+        "# Welcome to MaidCode!\nTo get started, see the documentation here.",
     );
 }
