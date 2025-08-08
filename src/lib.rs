@@ -118,21 +118,14 @@ pub fn new_project(dir_name: &Path, init: bool) {
     fs::create_dir(dir_name.join("src")).expect("'src/' directory already exists");
 
     let _ = fs::write(
-        dir_name.join("home.maid"),
-        r#"func home() {
-        serve("Hello world!");
-    }
-
-    home();
-
-    # greet someone
-    func greet(name) {
+            dir_name.join("home.maid"),
+            r#"func greet(name) {
         serve("Hello, " + name + "!");
     }
 
     greet("my Maid");
     "#,
-    );
+        );
 
     let _ = fs::write(
         dir_name.join("README.md"),
