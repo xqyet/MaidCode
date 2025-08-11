@@ -12,6 +12,8 @@ use std::{
     cell::RefCell,
     env, fs,
     io::{Write, stdin, stdout},
+    thread,
+    time::Duration,
     rc::Rc,
 };
 
@@ -130,6 +132,8 @@ impl BuiltInFunction {
             "type" => self.execute_type(args, exec_context),
             "run" => self.execute_exec(args, exec_context),
             "_env" => self.execute_env(args, exec_context),
+            "inline"  => self.execute_inline(args, exec_context),
+            "rest"   => self.execute_rest(args, exec_context),
             _ => panic!("CRITICAL ERROR: BUILT IN NAME IS NOT DEFINED"),
         }
     }
@@ -180,6 +184,52 @@ impl BuiltInFunction {
             .expect("did not enter a valid string");
 
         result.success(Some(Str::from(input.trim())))
+    }
+
+    pub fn execute_inline(&self, args: &[Value], exec_ctx: Rc<RefCell<Context>>) -> RuntimeResult {
+        let mut result = RuntimeResult::new();
+        result.register(self.check_and_populate_args(&["text".to_string()], args, exec_ctx));
+        if result.should_return() { return result; }
+
+        let text_arg = args[0].clone();
+        let s = match &text_arg {
+            Value::StringValue(string) => string.as_string(),
+            _ => {
+                return result.failure(Some(StandardError::new(
+                    "expected type string",
+                    text_arg.position_start().unwrap().clone(),
+                    text_arg.position_end().unwrap().clone(),
+                    Some("add the text to print without a newline"),
+                )));
+            }
+        };
+
+        print!("{}", s);
+        let _ = stdout().flush();
+        result.success(Some(Number::null_value()))
+    }
+
+    pub fn execute_rest(&self, args: &[Value], exec_ctx: Rc<RefCell<Context>>) -> RuntimeResult {
+        let mut result = RuntimeResult::new();
+        result.register(self.check_and_populate_args(&["seconds".to_string()], args, exec_ctx));
+        if result.should_return() { return result; }
+
+        let secs_arg = args[0].clone();
+        let secs = match &secs_arg {
+            Value::NumberValue(n) => n.value,
+            _ => {
+                return result.failure(Some(StandardError::new(
+                    "expected type number",
+                    secs_arg.position_start().unwrap().clone(),
+                    secs_arg.position_end().unwrap().clone(),
+                    Some("pass the number of seconds, e.g., rest(0.05)"),
+                )));
+            }
+        };
+
+        let dur = Duration::from_micros((secs * 1_000_000.0) as u64);
+        thread::sleep(dur);
+        result.success(Some(Number::null_value()))
     }
 
     pub fn execute_read(&self, args: &[Value], exec_ctx: Rc<RefCell<Context>>) -> RuntimeResult {

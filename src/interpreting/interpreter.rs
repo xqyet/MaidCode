@@ -31,7 +31,7 @@ impl Interpreter {
 
         let builtins = [
             "serve", "process", "sweep", "stash", "tostring", "tonumber", "length", "uhoh", "type", "run",
-            "_env",
+            "_env", "rest", "inline",
         ];
 
         for builtin in &builtins {
