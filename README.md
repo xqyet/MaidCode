@@ -91,6 +91,14 @@ greet("Maid");
 <p align="left">
   <img src="resources/icons/maid-vscode.png" alt="Searching for Maid in VS Code" width="35%">
 </p>
+- after installing the extension, run: 
+
+
+```bash
+cargo install maid-lang
+
+```
+or follow the popup box prompt to install cargo, and then to install maid.
 
 ## Package Installation (for other text editors and IDE's)
 
