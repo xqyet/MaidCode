@@ -77,8 +77,8 @@ greet("Maid");
 
 - Built-in modules for math, strings, and more
 - Easy-to-understand functions like `sweep()`, `stash()`, and `uhoh()`
-- Package management with `kennels` and extensible with `fetch`
-- Open source
+- Package management extensible with `fetch`
+- Open source & updated regularly. 
 - [Online Interpreter](https://maid-web-backend.fly.dev/) is live! Play with Maid in your browser!
 
 ## Easily add it as a VS Code Extension!
@@ -125,6 +125,8 @@ Now get busy creating in Maid! You may also check out the quick setup instructio
 ## Wanna Help Out?
 
 Contributors are welcome! Also feel free to try my [Online Interpreter](https://maid-web-backend.fly.dev/) for Maid.
+
+I’m currently working on making Maid installable through some other popular package managers, so in the future you’ll be able to run npm install maid, yarn add maid, or pip install maid in addition to my current cargo package.
 
 ![Interpreter](https://github.com/xqyet/MaidCode/raw/main/resources/icons/interpreter.png)
 
