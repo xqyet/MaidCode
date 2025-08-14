@@ -88,6 +88,9 @@ greet("Maid");
 - Search for **“Maid”** or go directly:  
   **https://marketplace.visualstudio.com/items?itemName=xqyet.maid-lang**
 - Click **Install**
+<p align="left">
+  <img src="resources/icons/maid-vscode.png" alt="Searching for Maid in VS Code" width="35%">
+</p>
 
 ## Package Installation (for other text editors and IDE's)
 
