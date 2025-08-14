@@ -80,7 +80,16 @@ greet("Maid");
 - Package management with `kennels` and extensible with `fetch`
 - Open source
 - [Online Interpreter](https://maid-web-backend.fly.dev/) is live! Play with Maid in your browser!
-## Package Installation
+
+## Easily add it as a VS Code Extension!
+
+### 1) From the Marketplace 
+- Open VS Code → **Extensions** (Ctrl/Cmd + Shift + X) - Or click the extensions button on the left side-bar upon opening VS Code.
+- Search for **“Maid”** or go directly:  
+  **https://marketplace.visualstudio.com/items?itemName=xqyet.maid-lang**
+- Click **Install**
+
+## Package Installation (for other text editors and IDE's)
 
 You can install **Maid** Programming Language globally using [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) which comes pre-packaged when downloading Rust:
 
