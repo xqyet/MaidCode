@@ -3,7 +3,7 @@ name = "maid-lang"
 repository = "https://github.com/xqyet/MaidCode.git"
 description = "Maid Programming Language"
 authors = ["xqyet"]
-version = "1.0.9"
+version = "1.1.0"
 edition = "2021"
 license = "MIT"
 
