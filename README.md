@@ -12,7 +12,7 @@ _A very simple interpreted programming language for beginners._
 
 ## Code in Action
 
-```
+```js
 # import the math module
 fetch std_math;
 
@@ -41,7 +41,7 @@ serve("Pi is equal to: " + tostring(math_pi));
 serve("We have reached the end of our program. I hope you enjoyed!");
 ```
 
-```
+```js
 # import the math module
 fetch std_math; # imports
 serve(math_pi); # built in functions
@@ -70,7 +70,39 @@ func greet(name) {
 }
 
 greet("Maid");
+```
 
+```js
+# --- mini lyrics demo  ---
+func __typeLine(t, char_delay, after_delay) {
+    obj out = "";
+    obj i = 0;
+    while i < length(t) {
+        obj out = out + charat(t, i);
+        inline("\r" + out);
+        rest(char_delay);
+        obj i = i + 1;
+    }
+    inline("\n");
+    if after_delay > 0 { rest(after_delay); }
+}
+
+func printLyricsMini() {
+    # [text, per-char delay, pause after line]
+    obj lines = [
+        ["This is one test",   0.02, 0.10],
+        ["This is two test",   0.02, 0.10],
+        ["This is three test", 0.02, 0.15]
+    ];
+
+    walk li = 0 through length(lines) {
+        obj e = retrieve(lines, li);
+        __typeLine(retrieve(e, 0), retrieve(e, 1), retrieve(e, 2));
+    }
+}
+
+serve("Mini lyrics demo:");
+printLyricsMini();
 ```
 
 ## Features
