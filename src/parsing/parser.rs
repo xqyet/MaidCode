@@ -728,9 +728,7 @@ impl Parser {
 
         if self.current_token_ref().token_type != TokenType::TT_RBRACKET {
             return parse_result.failure(Some(StandardError::new(
-                "expected '}'",
-                self.current_pos_start(),
-                self.current_pos_end(),
+                "expected '}'", self.current_pos_start(), self.current_pos_end(),
                 Some("add a '}' to close the body"),
             )));
         }
