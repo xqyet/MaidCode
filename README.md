@@ -77,10 +77,30 @@ greet("Maid");
 
 - Built-in modules for math, strings, and more
 - Easy-to-understand functions like `sweep()`, `stash()`, and `uhoh()`
-- Package management with `kennels` and extensible with `fetch`
-- Open source
+- Package management extensible with `fetch`
+- Open source & updated regularly. 
 - [Online Interpreter](https://maid-web-backend.fly.dev/) is live! Play with Maid in your browser!
-## Package Installation
+
+## Easily add it as a VS Code Extension!
+
+### 1) From the Marketplace 
+- Open VS Code → **Extensions** (Ctrl/Cmd + Shift + X) - Or click the extensions button on the left side-bar upon opening VS Code.
+- Search for **“Maid”** or go directly:  
+  **https://marketplace.visualstudio.com/items?itemName=xqyet.maid-lang**
+- Click **Install**
+<p align="left">
+  <img src="resources/icons/maid-vscode.png" alt="Searching for Maid in VS Code" width="35%">
+</p>
+- after installing the extension, run: 
+
+
+```bash
+cargo install maid-lang
+
+```
+or follow the popup box prompt to install cargo, and then to install maid.
+
+## Package Installation (for other text editors and IDE's)
 
 You can install **Maid** Programming Language globally using [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) which comes pre-packaged when downloading Rust:
 
@@ -105,6 +125,8 @@ Now get busy creating in Maid! You may also check out the quick setup instructio
 ## Wanna Help Out?
 
 Contributors are welcome! Also feel free to try my [Online Interpreter](https://maid-web-backend.fly.dev/) for Maid.
+
+I’m currently working on making Maid installable through some other popular package managers, so in the future you’ll be able to run npm install maid, yarn add maid, or pip install maid in addition to my current cargo package.
 
 ![Interpreter](https://github.com/xqyet/MaidCode/raw/main/resources/icons/interpreter.png)
 
